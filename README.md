@@ -77,16 +77,16 @@ This is a RESTful API for a news aggregator service built with Laravel. The API 
 
 10. **Access the Application with the APIs as per curl requests given in Swagger Documentation. By default the service will run in port 8000**
    ```bash
-   http://localhost:8000
-   
+   http://localhost:8000 
+   ```
+
 
 11. **Check logs and status of each containers with below commands**
-
    ```bash
    docker-compose logs news-aggregator-app          # For PHP/Laravel logs
    docker-compose logs news-aggregator-mysql        # For MySQL logs
    docker-compose logs news-aggregator-redis        # For Redis logs
-
+   ```
 
 ## API DOCUMENTATION - SWAGGER 
 
