@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  # PHP service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: news-aggregator-app
+    ports:
+      - "8000:9000"
+    volumes:
+      - .:/var/www/html
+    networks:
+      - news-aggregator-network
+    depends_on:
+      - mysql
+      - redis
+
+  # MySQL service
+  mysql:
+    image: mysql:5.7
+    container_name: news-aggregator-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword  # Change as needed
+      MYSQL_DATABASE: news_aggregator     # Your DB name
+      MYSQL_USER: user                   # Your DB username
+      MYSQL_PASSWORD: password           # Your DB password
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - news-aggregator-network
+
+  # Redis service
+  redis:
+    image: redis:latest
+    container_name: news-aggregator-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - news-aggregator-network
+
+networks:
+  news-aggregator-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
